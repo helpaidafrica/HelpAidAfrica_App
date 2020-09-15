@@ -1,0 +1,37 @@
+{
+  "expo": {
+    "name": "HelpAidAfrica",
+    "slug": "haa",
+    "privacy": "public",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#F8CD46"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": false,
+      "backgroundColor": "#F8F8F8",
+      "bundleIdentifier": "TODO",
+      "buildNumber": "1.0.0"
+    },
+    "description": "",
+    "backgroundColor": "#DADADA",
+    "android": {
+      "package": "com.helpaidafrica.boxtrackingapp"
+    }
+  }
+}
