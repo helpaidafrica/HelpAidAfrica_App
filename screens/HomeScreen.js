@@ -17,7 +17,7 @@ import SafeAreaView from 'react-native-safe-area-view';
 
 var Global = require('../assets/styles/global');
 
-import NiceMessage from '../components/NiceMessage'
+import NiceMessage from '../components/HomeScreenComponents/NiceMessage'
 import ProfileCardList from '../components/HomeScreenComponents/ProfileCardList'
 import UserBoxList from '../components/HomeScreenComponents/UserBoxList'
 

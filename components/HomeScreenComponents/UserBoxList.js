@@ -12,24 +12,7 @@ import { Feather, FontAwesome5 } from '@expo/vector-icons';
 
 import CardList from '../CardList'
 
-const cardData = [
-        {
-            icon: <Feather name="box" size={18} color="black" />,
-            label: "500 boxes delivered",
-            showArrow: false,
-            key: 0,
-            onPress: null,
-            pressable: false
-        },
-        {
-            icon: <FontAwesome5 name="trophy" size={18} color="black" />,
-            label: "Rank #1 out of 23",
-            showArrow: true,
-            key: 1,
-            onPress: "Ranking",
-            pressable: true
-        }
-]
+
 
 
 class UserBoxList extends React.Component {
@@ -40,6 +23,25 @@ class UserBoxList extends React.Component {
     }
 
   render() {
+    const cardData = [
+        {
+            icon: <Feather name="box" size={18} color="black" />,
+            label: this.props.totalBoxesDelivered + " boxes delivered",
+            showArrow: false,
+            key: 0,
+            onPress: null,
+            pressable: false
+        },
+        {
+            icon: <FontAwesome5 name="trophy" size={18} color="black" />,
+            label: "Rank #" + this.props.rank + " out of " + this.props.rankTotal,
+            showArrow: true,
+            key: 1,
+            onPress: "Ranking",
+            pressable: true
+        }
+    ]
+
     return(
         <View style={styles.container}>
             <CardList cardData={cardData} {...this.props}/>
@@ -50,8 +52,9 @@ class UserBoxList extends React.Component {
 
 function mapStateToProps(state){
     return {
-        counter: state.testReducer.counter,
-        counterMultiplied: state.testReducer.counterMultiplied
+        totalBoxesDelivered: state.appStateReducer.totalBoxesDelivered,
+        rank: state.appStateReducer.rank,
+        rankTotal: state.appStateReducer.rankTotal,
     }
 }
 

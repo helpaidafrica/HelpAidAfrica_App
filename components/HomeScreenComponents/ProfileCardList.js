@@ -12,25 +12,6 @@ import { MaterialIcons, SimpleLineIcons } from '@expo/vector-icons';
 
 import CardList from '../CardList'
 
-const cardData = [
-        {
-            icon: <MaterialIcons name="account-circle" size={18} color="black" />,
-            label: "Mohib Ali Jafri",
-            showArrow: false,
-            key: 0,
-            onPress: null,
-            pressable: false
-        },
-        {
-            icon: <MaterialIcons name="email" size={18} color="black" />,
-            label: "mohib@helpaidafrica.org",
-            showArrow: false,
-            key: 1,
-            onPress: null,
-            pressable: false
-        }
-]
-
 
 class ProfileCardList extends React.Component {
     constructor(props) {
@@ -40,6 +21,24 @@ class ProfileCardList extends React.Component {
     }
 
   render() {
+    const cardData = [
+        {
+            icon: <MaterialIcons name="account-circle" size={18} color="black" />,
+            label: this.props.fullname,
+            showArrow: false,
+            key: 0,
+            onPress: null,
+            pressable: false
+        },
+        {
+            icon: <MaterialIcons name="email" size={18} color="black" />,
+            label: this.props.email,
+            showArrow: false,
+            key: 1,
+            onPress: null,
+            pressable: false
+        }
+    ]
     return(
         <View style={styles.container}>
             <CardList cardData={cardData} {...this.props}/>
@@ -50,8 +49,8 @@ class ProfileCardList extends React.Component {
 
 function mapStateToProps(state){
     return {
-        counter: state.testReducer.counter,
-        counterMultiplied: state.testReducer.counterMultiplied
+        fullname: state.appStateReducer.fullname,
+        email: state.appStateReducer.email,
     }
 }
 

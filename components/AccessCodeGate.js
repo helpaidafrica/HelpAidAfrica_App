@@ -19,6 +19,7 @@ import {connect} from 'react-redux'
 import * as Linking from 'expo-linking';
 import * as WebBrowser from 'expo-web-browser';
 
+import ClientAPI from '../clientAPI'
 
 
 import ButtonCustom from './ButtonCustom'
@@ -33,34 +34,29 @@ class AccessCodeGate extends React.Component {
         };
     }
     _handleOpenApp(){
-        this.props._handleSetupGatePassed() // temporary
-        if (this.props.PermissionsOK && this.props.LoggedIn){
-            this.props._handleSetupGatePassed()
-            return
-        }
+        this.props._handleSetupGatePassed() 
     }
 
-    _handleLearnMoreClicked(){
-        WebBrowser.openBrowserAsync('https://helpaidafrica.org');
-    }
-
-    _handleCodeTyped(text){
+    async _handleCodeTyped(text){
+        this.setState({accessCode: text})
+        
         if (text.length >= 4){
-            if (text == "1234"){
+            let correctCode = (await ClientAPI.checkAccessCode(text)).proceed
+            if (correctCode){
                 LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
                 this._handleOpenApp()
                 return
             }
-
         }
-
-        this.setState({accessCode: text})
     }
 
     _handleJoinTeam(){
         Linking.openURL("mailto:info@helpaidafrica.org?subject=I want to join the team!");        
     }
 
+      _handleLearnMoreClicked(){
+        WebBrowser.openBrowserAsync('https://helpaidafrica.org');
+    }
 
 
   render() {

@@ -5,8 +5,7 @@ import {
     View,
     Image
 } from 'react-native';
-import layout from '../constants/Layout.js';
-var Global = require('../assets/styles/global');
+var Global = require('../../assets/styles/global');
 import {connect} from 'react-redux'
 
 
@@ -20,9 +19,9 @@ class TemplateComponent extends React.Component {
   render() {
     return(
         <View style={styles.container}>
-            <Image style={styles.logo} source={require("../assets/images/logoRaw.png")}/>
+            <Image style={styles.logo} source={require("../../assets/images/logoRaw.png")}/>
             <Text style={styles.text}>You're making the world a better place,</Text>
-            <Text style={styles.text}>Mohib.</Text>
+            <Text style={styles.text}>{this.props.fullname}.</Text>
 
         </View>
     );
@@ -31,8 +30,7 @@ class TemplateComponent extends React.Component {
 
 function mapStateToProps(state){
     return {
-        counter: state.testReducer.counter,
-        counterMultiplied: state.testReducer.counterMultiplied
+        fullname: state.appStateReducer.fullname,
     }
 }
 

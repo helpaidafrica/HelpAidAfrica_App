@@ -1,4 +1,3 @@
-
 node_modules/*
-clientAPI/*
-redux/*
+builds/*
+clientAPI/interfaceSPEC.js

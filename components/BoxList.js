@@ -3,13 +3,13 @@ import {
     StyleSheet,
     Text,
     View,
-    Button
+    Button,
+    Alert
 } from 'react-native';
-
+import layout from '../constants/Layout.js';
 var Global = require('../assets/styles/global');
 import {connect} from 'react-redux'
-import ClientAPI from '../clientAPI'
-
+  
 
 class TemplateComponent extends React.Component {
     constructor(props) {
@@ -18,13 +18,36 @@ class TemplateComponent extends React.Component {
         };
     }
 
+
+    getBoxList(){
+
+        let query = `{
+  listBoxs {
+    items {
+      id
+      orgID
+      qrCode
+      status
+      statusHistory
+    }
+  }
+}`
+                fetch('https://c4xc6mjcy5ffbfptov4e4uerg4.appsync-api.us-east-1.amazonaws.com/graphql', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'X-API-KEY': 'da2-e5zx4z4jgjhwner6p7qbqkl2m4' },
+          body: JSON.stringify({ query: query }),
+        })
+          .then(res => res.json())
+          .then(res => console.log(res));
+    }
+
   render() {
+
+    
     return(
         <View style={styles.container}>
-            <Text>Test Counter to Show Redux:  {this.props.counter}</Text>
-            <Text>Counter Plus 10: {this.props.counterMultiplied}</Text>
-            <Button title="Decrease Counter" onPress= {()=> this.props.decreaseCounter()}/>
-            <Button title="Increase Counter by 5" onPress= {()=> this.props.increaseCounter(5)}/>
+            <Button title="Decrease Counter" onPress= {()=> this.getBoxList()}/>
+            <Button title="Increase Counter by 5" onPress= {()=> this.props.increaseCounter(10)}/>
 
         </View>
     );
@@ -49,6 +72,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: 'white',
         flex: 1,
+        marginTop: 50
     },
 });
 

@@ -25,8 +25,8 @@
     "ios": {
       "supportsTablet": false,
       "backgroundColor": "#F8F8F8",
-      "bundleIdentifier": "TODO",
-      "buildNumber": "1.0.0"
+      "buildNumber": "1.0.0",
+      "bundleIdentifier": "com.helpaidafrica.boxtrackingapp"
     },
     "description": "",
     "backgroundColor": "#DADADA",

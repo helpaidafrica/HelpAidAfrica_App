@@ -8,25 +8,20 @@ import {
   TouchableOpacity,
   Button,
   StatusBar,
-  View
+  View,
+  AsyncStorage
 } from 'react-native';
 
-import SafeAreaView from 'react-native-safe-area-view';
+import BoxList from '../components/BoxList'
 
 var Global = require('../assets/styles/global');
-
-import { MonoText } from '../components/StyledText';
-
 
 export default function SettingsScreen(props) {
 
   return (
-        <View style={{height: '100%'}}>
-            {Platform.OS === 'ios' && <StatusBar barStyle="light-content" />}
-            <SafeAreaView style={styles.container}>
-
-            </SafeAreaView>
-        </View>
+    <View style={styles.container}>
+      <BoxList/>
+    </View>
 
   );
 }
@@ -36,8 +31,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Global.Styles.appBackgroundColor,
-    paddingTop: 10,
-    height: "100%",
+    paddingTop: 50,
     paddingHorizontal: 5,
     flexDirection: 'column',
   },
