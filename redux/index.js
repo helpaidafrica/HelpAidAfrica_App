@@ -7,8 +7,8 @@ import {
 const persistConfig = {
 	key: 'root',
   	storage: AsyncStorage,
-  	blacklist: ['testReducer', 'sessionReducer'], // items in these reducers will not persist between app sessions. 
-  	whitelist: ['addContactReducer', 'appStateReducer'] // items in these reducers will  persist between app sessions. 
+  	blacklist: ['testReducer', 'sessionReducer', 'addBoxReducer'], // items in these reducers will not persist between app sessions. 
+  	whitelist: ['appStateReducer'] // items in these reducers will  persist between app sessions. 
 }
 
 import reducers from './reducers'

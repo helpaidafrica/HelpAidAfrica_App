@@ -1,5 +1,4 @@
 import {
-    AsyncStorage,
     Alert
 } from 'react-native';
 

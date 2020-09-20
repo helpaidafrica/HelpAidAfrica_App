@@ -5,6 +5,8 @@ import AddScreen from "../../screens/AddScreen";
 import InputBoxScreen from "../../screens/subscreens/InputBoxScreen";
 import AddScreenHeader from "../../components/AddScreenComponents/AddScreenHeader";
 
+import { Feather } from '@expo/vector-icons'; 
+
 const AddTrackingStack = createStackNavigator()
 function AddTracking() {
   return (
@@ -27,12 +29,7 @@ function AddTracking() {
         component={InputBoxScreen} 
         options={{
               headerBackTitleVisible: false,
-              headerLeft: (navigation) => (
-                <TouchableOpacity onPress={(navigation)=> console.log(JSON.stringify(navigation))} >
-                  <Text style={{fontSize: 25}}>x</Text>
-                </TouchableOpacity>
-              )
-
+              headerBackImage: ()=> <View style={{marginLeft: 10}}><Feather name="x" size={24} color="black" /></View>
         }}
       
       />
