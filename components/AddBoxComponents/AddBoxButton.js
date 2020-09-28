@@ -26,7 +26,7 @@ class BoxButton extends React.Component {
     }
 
     async _handleAddBoxButtonClicked(){
-        await ClientAPI.addBoxToEvent({boxID:this.props.boxID_Number, nextBoxState: this.props.boxData.nextState}, this.props.navigation)
+        await ClientAPI.addBoxToEvent({boxID:this.props.boxData.message, nextBoxState: this.props.boxData.nextState}, this.props.navigation)
     }
 
   render() {

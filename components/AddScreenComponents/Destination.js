@@ -12,17 +12,6 @@ import { FontAwesome, Entypo } from '@expo/vector-icons';
 
 import CardList from '../CardList'
 
-const cardData = [
-        {
-            icon: <Entypo name="location-pin" size={18} color="black" />,
-            label: "Destination Location",
-            showArrow: true,
-            key: 1,
-            onPress: "Ranking",
-            pressable: true
-        }
-]
-
 
 class UserBoxList extends React.Component {
     constructor(props) {
@@ -32,6 +21,17 @@ class UserBoxList extends React.Component {
     }
 
   render() {
+    const cardData = [
+        {
+            icon: <Entypo name="location-pin" size={18} color="black" />,
+            label: this.props.locationLabel,
+            showArrow: true,
+            key: 1,
+            onPress: "Select Destination",
+            pressable: true
+        }
+    ]
+
     return(
         <View style={styles.container}>
             <CardList cardData={cardData} {...this.props}/>
@@ -42,8 +42,7 @@ class UserBoxList extends React.Component {
 
 function mapStateToProps(state){
     return {
-        counter: state.testReducer.counter,
-        counterMultiplied: state.testReducer.counterMultiplied
+        locationLabel: state.trackingEventReducer.destinationOrg.locationLabel 
     }
 }
 

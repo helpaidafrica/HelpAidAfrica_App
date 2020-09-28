@@ -93,18 +93,74 @@ module.exports.searchForBox = async (boxID) => {
 
 
 module.exports.addBoxToEvent = async (payload, navigation) => {
+
+    // let user know progress is happening
     store.dispatch({type: 'ADDBOX_TOEVENT', addingBoxToEvent: true})
+
+    
+    // debug
     await module.exports.sleep(2000)
+    console.log("box add to event TODO: " + JSON.stringify(payload))    
+
+    // get current boxes in event
+    let boxes = store.getState().trackingEventReducer.boxes
+
+    // append to boxes array
+    boxes = boxes.concat({boxID: payload.boxID, nextBoxState: payload.nextBoxState})
+
+    // dispatch to update array
+    store.dispatch({type: 'UPDATE_BOXES', boxes: boxes})
+
+    // reset addbox reducers
     store.dispatch({type: 'ADDBOX_TOEVENT', addingBoxToEvent: false})
-
-    console.log("box add to event TODO: " + JSON.stringify(payload))
-
-    // Reset reducer states in AddBoxModal
     store.dispatch({type: 'RESET_ADDBOX'})
 
-    // Leave modal
+    // close out of modal
     navigation.goBack()
+    
     return;
+}
+
+module.exports.getBoxStatusEnumValues = async () => {
+    let failedResponse = {success: false, data: "Couldn't grab box status values."}
+    let successResponse = {success: true, data: "Grabbed box status values."}
+
+    // actually call API. 
+    // graphql query
+    let query = `{
+      GetBoxStatusEnumValues: __type(name: "BoxStatus") {
+        name, enumValues (includeDeprecated : false) {
+          name
+        }
+      }
+    }`
+
+    // setup request
+    let props = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-API-KEY': store.getState().sessionReducer.APIKEY },
+        body: JSON.stringify({ query: query })
+    }
+
+    // 
+    try {
+        let response = await fetch(API_ENDPOINT, props);
+        let r = await response.json();
+        if (r.hasOwnProperty("error")){
+            return failedResponse
+        }
+        r = r.data.GetBoxStatusEnumValues.enumValues
+        r = r.map(item => item.name)
+        store.dispatch({type: 'UPDATE_BOXSTATUSOPTIONS', BoxStatusOptions: r})
+        return successResponse
+    } catch (error) {
+        return failedResponse;
+    }
+
+    return {
+      success: true,
+      data: "All good."
+    };
 }
 
 module.exports._test = async () => {

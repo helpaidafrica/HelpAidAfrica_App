@@ -18,7 +18,7 @@ const cardData = [
             label: "Notes",
             showArrow: true,
             key: 0,
-            onPress: "Ranking",
+            onPress: "Notes",
             pressable: true
         },
 ]

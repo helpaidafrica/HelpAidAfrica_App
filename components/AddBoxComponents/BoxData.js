@@ -4,7 +4,8 @@ import {
     Text,
     View,
     Button,
-    LayoutAnimation
+    LayoutAnimation,
+    Alert
 } from 'react-native';
 
 var Global = require('../../assets/styles/global');
@@ -14,6 +15,8 @@ import * as Device from 'expo-device'
 
 import ModalSelector from 'react-native-modal-selector'    
 import RNPickerSelect from 'react-native-picker-select';
+// import {Picker} from '@react-native-community/picker';
+
 
 
 import ButtonCustom from '../ButtonCustom'
@@ -23,8 +26,18 @@ class BoxData extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            nextBoxStatus: null
+            nextBoxStatus: null,
+            selectedIndex: 0
         };
+    }
+
+    async componentDidUpdate(){
+        if (this.props.BoxStatusOptions.length == 0){
+            let r = await ClientAPI.getBoxStatusEnumValues();
+            if (!r.success){
+                Alert.alert("Couldn't grab box status options: " + r.data)
+            }
+        }
     }
 
     _handleNextStateChosen(option){
@@ -38,39 +51,24 @@ class BoxData extends React.Component {
 
   render() {
     let index =0;
-    const BoxStatusOptions = ['NEW', 'PACKAGED','PICKUP_IN_TRANSIT','PICKUP_COMPLETED', 'READY_TO_SHIP']
-    const data = [
-        { key: index++, section: true, label: 'Box State' },
-        { key: index++, label: 'NEW' },
-        { key: index++, label: 'PACKAGED' },
-    ];
+    const BoxStatusOptions = this.props.BoxStatusOptions;
 
-    const PickerForIOS = ()=>{
+    const data = BoxStatusOptions.map(option=> ({key: index++, label: option}));
+    data.unshift(({key: index++, section: true, label:"Box State"}))
+
+    const PickerCustom = ()=>{
         return (
             <ModalSelector
-                data={  data}
+                data={data}
                 onChange={(option)=> this._handleNextStateChosen(option)} 
                 animationType={"fade"}
                 backdropPressToClose={true}
-                scrollViewPassThruProps={{scrollEnabled: false}}
+                scrollViewPassThruProps={{scrollEnabled: true}}
                 cancelStyle={{height:0, margin: 0, padding:0, backgroundColor: 'rgba(0,0,0,0.7)' }}
                 sectionTextStyle={{fontWeight: 'bold'}}
             >
                 <ButtonCustom buttonText={"Next State: " + this.props.boxData.nextState} color={Global.Styles.primaryLight} onPress={()=>Alert.alert("Button clicked.")}/>
             </ModalSelector>
-        )
-    }
-
-    const PickerForAndroid = ()=>{
-        return (
-            <RNPickerSelect
-            onValueChange={(value) => console.log(value)}
-            items={[
-                { label: 'Football', value: 'football' },
-                { label: 'Baseball', value: 'baseball' },
-                { label: 'Hockey', value: 'hockey' },
-            ]}
-        />
         )
     }
 
@@ -83,11 +81,7 @@ class BoxData extends React.Component {
                     <View>
                         <Text style={[{color:"black"}, styles.messageText]}>{this.props.boxData.message || null}</Text>
                         <ButtonCustom disabled={true} buttonText={"Last State: " + this.props.boxData.currentState} color={Global.Styles.cancelRed} onPress={()=>Alert.alert("Button clicked.")}/>
-                        {
-                            Device.osName == 'Android' ?
-                            <PickerForAndroid/> :
-                            <PickerForIOS/>
-                        }
+                        <PickerCustom/>
 
                     </View>
                 )
@@ -112,7 +106,8 @@ class BoxData extends React.Component {
 function mapStateToProps(state){
     return {
         boxData: state.addBoxReducer.boxData,
-        boxSearch: state.addBoxReducer.boxSearch
+        boxSearch: state.addBoxReducer.boxSearch,
+        BoxStatusOptions: state.sessionReducer.BoxStatusOptions
     }
 }
 

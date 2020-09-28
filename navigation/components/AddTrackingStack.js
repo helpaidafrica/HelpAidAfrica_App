@@ -1,8 +1,11 @@
 import React from "react";
 import { Button, View, Text, TouchableOpacity } from "react-native"
-import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
+import { createStackNavigator, TransitionPresets, CardStyleInterpolators } from '@react-navigation/stack';
 import AddScreen from "../../screens/AddScreen";
 import InputBoxScreen from "../../screens/subscreens/InputBoxScreen";
+import BoxesAddedSummaryScreen from "../../screens/subscreens/BoxesAddedSummaryScreen";
+import DestinationSelectScreen from "../../screens/subscreens/DestinationSelectScreen";
+import AddNotesScreen from "../../screens/subscreens/AddNotesScreen";
 import AddScreenHeader from "../../components/AddScreenComponents/AddScreenHeader";
 
 import { Feather } from '@expo/vector-icons'; 
@@ -30,6 +33,39 @@ function AddTracking() {
         options={{
               headerBackTitleVisible: false,
               headerBackImage: ()=> <View style={{marginLeft: 10}}><Feather name="x" size={24} color="black" /></View>
+        }}
+      
+      />
+
+      <AddTrackingStack.Screen 
+        name="Boxes Added Summary" 
+        component={BoxesAddedSummaryScreen} 
+        options={{
+              headerBackTitleVisible: false,
+              gestureDirection: 'horizontal',
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
+      
+      />
+
+      <AddTrackingStack.Screen 
+        name="Select Destination" 
+        component={DestinationSelectScreen} 
+        options={{
+              headerBackTitleVisible: false,
+              gestureDirection: 'horizontal',
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
+      
+      />
+
+      <AddTrackingStack.Screen 
+        name="Notes" 
+        component={AddNotesScreen} 
+        options={{
+              headerBackTitleVisible: false,
+              gestureDirection: 'horizontal',
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
         }}
       
       />

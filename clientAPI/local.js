@@ -47,7 +47,6 @@ const isAPIHealthy = async() => {
 
 // This runs every time the app launches. 
 module.exports.startupSequence = async () => {
-    store.dispatch({type: 'UPDATE_ACCESSGATE', AccessGatePassed: false})
 
     // STEP 0: check API Health
     let APIHealthy = await isAPIHealthy();

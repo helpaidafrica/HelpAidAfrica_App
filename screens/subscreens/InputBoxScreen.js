@@ -26,13 +26,11 @@ export default function InputBoxScreen(props) {
 
   return (
         <View style={styles.container}>
-          <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
             <View style={styles.inputMethods}>
               <QRCodeInput/>
               <ManualInput/>
               <BoxData/>
             </View>
-          </TouchableWithoutFeedback>
 
           <AddBoxButton {...props}/>
         </View>
