@@ -1922,6 +1922,14 @@
   version "0.1.10"
   resolved "https://registry.yarnpkg.com/@react-native-community/masked-view/-/masked-view-0.1.10.tgz#5dda643e19e587793bc2034dd9bf7398ad43d401"
 
+"@react-native-community/picker@1.6.0":
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/@react-native-community/picker/-/picker-1.6.0.tgz#ddb2b04ca251b79980e3052ece4e685b7abf0444"
+
+"@react-native-community/picker@^1.6.0":
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/@react-native-community/picker/-/picker-1.8.0.tgz#32425321af1e29e3da882fbd627a71ea142c75e4"
+
 "@react-navigation/area-view@0.0.0-alpha.12":
   version "0.0.0-alpha.12"
   resolved "https://registry.yarnpkg.com/@react-navigation/area-view/-/area-view-0.0.0-alpha.12.tgz#f2bd7be9658fc8fe4d11704d48820febfd2b4a3d"
@@ -6618,6 +6626,13 @@ react-native-modal-selector@^2.0.3:
 react-native-modalize@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/react-native-modalize/-/react-native-modalize-2.0.3.tgz#c62db01ea75459fed6a7e5b3df26fb899677392c"
+
+react-native-picker-select@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-picker-select/-/react-native-picker-select-8.0.0.tgz#75d9e1fd982ea3cdbb9f47f327f33ce8007a5ef3"
+  dependencies:
+    "@react-native-community/picker" "^1.6.0"
+    lodash.isequal "^4.5.0"
 
 react-native-pie@^1.1.2:
   version "1.1.2"

@@ -10,6 +10,7 @@ import {
     LayoutAnimation
 } from 'react-native';
 
+import * as Device from 'expo-device';
 var Global = require('../../assets/styles/global');
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons'; 
 import {connect} from 'react-redux'
@@ -34,8 +35,17 @@ class QRCodeInput extends React.Component {
         LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
         this.props.updateBoxScanned(true); 
 
-        if (type !== "org.iso.QRCode"){
-            Alert.alert("You must scan a QR code")
+        console.log(type)
+        console.log(Device.manufacturer)
+        console.log(Device.brand)
+        console.log(Device.osName)
+
+        if (type !== "org.iso.QRCode" && Device.osName == "Apple"){
+            Alert.alert("iOS: You must scan a QR code")
+        }
+
+        if (type !== 256 && Device.osName == "Android"){
+            Alert.alert("Android: You must scan a QR code")
         }
 
         if (!data.includes("https://track.helpaidafrica.org/where-is-my-donation-box?id=")){
@@ -50,7 +60,13 @@ class QRCodeInput extends React.Component {
 
     }
 
-    _handleQRIconClicked(){
+    async _handleQRIconClicked(){
+        const { status } = await BarCodeScanner.requestPermissionsAsync();
+        if (status !== 'granted'){
+            Alert.alert("Please allow access to camera. ")
+            return;s
+        }
+
         LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
         this.props.updateBoxScanned(false); 
         this.props.updateBoxID_Number("")

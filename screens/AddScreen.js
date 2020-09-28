@@ -32,7 +32,6 @@ export default function AddScreen(props) {
                 <Time {...props}/>
                 <Destination {...props}/>
                 <Boxes {...props}/>
-                <Photos {...props}/>
                 <Notes {...props}/>
 
                 <ButtonCustom buttonText="Complete Tracking Event" color={Global.Styles.primaryGreen} onPress={()=>props.navigation.navigate("Main")}/>

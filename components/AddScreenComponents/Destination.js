@@ -14,20 +14,12 @@ import CardList from '../CardList'
 
 const cardData = [
         {
-            icon: <FontAwesome name="building" size={18} color="black" />,
-            label: "Destination Name",
-            showArrow: true,
-            key: 0,
-            onPress: "Ranking",
-            pressable: true
-        },
-        {
             icon: <Entypo name="location-pin" size={18} color="black" />,
             label: "Destination Location",
-            showArrow: false,
+            showArrow: true,
             key: 1,
-            onPress: null,
-            pressable: false
+            onPress: "Ranking",
+            pressable: true
         }
 ]
 

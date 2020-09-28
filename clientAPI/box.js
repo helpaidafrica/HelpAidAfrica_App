@@ -9,6 +9,8 @@ import ReactNativeHapticFeedback from "react-native-haptic-feedback";
 module.exports.searchForBox = async (boxID) => {
 
    store.dispatch({type: 'UPDATE_BOX_SEARCH', boxSearch: "searching"})
+
+   // SIMULATED SEARCH
    await module.exports.sleep(2000)
 
    let failureResponse = {
@@ -22,6 +24,66 @@ module.exports.searchForBox = async (boxID) => {
    		currentState: "Shipping",
    		nextState: "Delivered"
    	}
+
+    // REAL SEARCH
+    // graphql query
+    let query = `{
+      BoxByTitle(title: "${boxID}") {
+        items {
+          id
+          status
+          title
+          notes
+          boxCategory {
+            name
+          }
+        }
+      }
+    }`
+
+    // setup request
+    let props = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-API-KEY': store.getState().sessionReducer.APIKEY },
+        body: JSON.stringify({ query: query })
+    }
+
+    // 
+    try {
+        let response = await fetch(API_ENDPOINT, props);
+        let r = await response.json();
+        console.log(r)
+
+        // check if error
+        if (r.hasOwnProperty("error")){
+            console.log("API Health error code 0: " + JSON.stringify(r))
+            store.dispatch({type: 'UPDATE_BOX_DATA', boxData: {message:"Failed: " + r}})
+            store.dispatch({type: 'UPDATE_BOX_SEARCH', boxSearch: "searchFailure"})
+            return false
+        }
+
+        // check if no data returned
+        if (r.data.BoxByTitle.items.length == 0){
+            store.dispatch({type: 'UPDATE_BOX_DATA', boxData: {message: "No box with that ID found"}})
+            store.dispatch({type: 'UPDATE_BOX_SEARCH', boxSearch: "searchFailure"})
+            return false
+        }
+
+        // if all good, proceed.
+        r = r.data.BoxByTitle.items[0]
+        store.dispatch({type: 'UPDATE_BOX_DATA', boxData: {message: r.id, currentState: r.status, nextState: "TODO"}})
+        store.dispatch({type: 'UPDATE_BOX_SEARCH', boxSearch: "searchSuccess"})
+
+
+        // r = r.data.BoxByTitle.items[0]
+    } catch (error) {
+        console.log("API Health error code 1: " + error)
+        store.dispatch({type: 'UPDATE_BOX_DATA', boxData: failureResponse})
+        store.dispatch({type: 'UPDATE_BOX_SEARCH', boxSearch: "searchFailure"})
+        return false;
+    }
+    
+    return true
 
    store.dispatch({type: 'UPDATE_BOX_DATA', boxData: successResponse})
    store.dispatch({type: 'UPDATE_BOX_SEARCH', boxSearch: "searchSuccess"})
