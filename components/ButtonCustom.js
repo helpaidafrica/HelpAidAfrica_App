@@ -3,11 +3,14 @@ import {
     StyleSheet,
     Text,
     View,
-    TouchableOpacity
+    TouchableOpacity,
+    ActivityIndicator
 } from 'react-native';
 import layout from '../constants/Layout.js';
 var Global = require('../assets/styles/global');
 import {connect} from 'react-redux'
+
+import * as Haptics from 'expo-haptics';
 
 
 class ButtonCustom extends React.Component {
@@ -20,8 +23,11 @@ class ButtonCustom extends React.Component {
   render() {
     return(
         <View style={styles.container}>
-            <TouchableOpacity style={[styles.button, {backgroundColor: this.props.color,}]} onPress={()=>this.props.onPress()}>
-                <Text style={{color: 'white'}}>{this.props.buttonText}</Text>
+            <TouchableOpacity disabled={this.props.disabled} style={[styles.button, {backgroundColor: this.props.disabled ? "#dddddd" : this.props.color,}]} onPress={()=>{Haptics.impactAsync("medium"); this.props.onPress()}}>
+                { this.props.loading ?
+                    <ActivityIndicator size="small" color="white" /> :
+                    <Text style={{fontWeight: 'bold',color: this.props.disabled ? "grey" :'white'}}>{this.props.buttonText}</Text>
+                }
             </TouchableOpacity>
 
         </View>
@@ -52,7 +58,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
-    padding: 8,
+    padding: 15,
     borderRadius: 8,
     margin: 5
   }

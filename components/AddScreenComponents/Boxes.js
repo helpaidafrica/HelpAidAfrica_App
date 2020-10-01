@@ -12,7 +12,17 @@ import { Feather, MaterialIcons } from '@expo/vector-icons';
 
 import CardList from '../CardList'
 
-const cardData = [
+
+class UserBoxList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+        };
+    }
+
+  render() {
+
+    const cardData = [
         {
             icon: <MaterialIcons name="add-box" size={18} color="black" />,
             label: "Add Box",
@@ -23,23 +33,13 @@ const cardData = [
         },
         {
             icon: <Feather name="box" size={18} color="black" />,
-            label: "0 boxes total",
+            label: this.props.boxes.length + " boxes total",
             showArrow: true,
             key: 1,
-            onPress: "Ranking",
+            onPress: "Boxes Added Summary",
             pressable: true
         }
-]
-
-
-class UserBoxList extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-        };
-    }
-
-  render() {
+    ]
     return(
         <View style={styles.container}>
             <CardList cardData={cardData} {...this.props}/>
@@ -50,8 +50,7 @@ class UserBoxList extends React.Component {
 
 function mapStateToProps(state){
     return {
-        counter: state.testReducer.counter,
-        counterMultiplied: state.testReducer.counterMultiplied
+        boxes: state.trackingEventReducer.boxes,
     }
 }
 

@@ -29,8 +29,8 @@ export default function HomeScreen(props) {
         {Platform.OS === 'ios' && <StatusBar barStyle="dark-content" />}
         <View style={styles.container}>
           <NiceMessage/>
-          <ProfileCardList {...props}/>
-          <UserBoxList {...props}/>
+          {/*<ProfileCardList {...props}/>
+                    <UserBoxList {...props}/>*/}
         </View>
     </View>
 

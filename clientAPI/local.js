@@ -1,5 +1,4 @@
 import {
-    AsyncStorage,
     Alert
 } from 'react-native';
 
@@ -34,12 +33,12 @@ const isAPIHealthy = async() => {
         let response = await fetch(API_ENDPOINT, props);
         let r = await response.json();
         if (r.hasOwnProperty("error")){
-            console.warn("API Health error code 0: " + JSON.stringify(r))
+            console.log("API Health error code 0: " + JSON.stringify(r))
             return false
         }
         return r.data.listApihealthCheckInfos.items[0].proceed
     } catch (error) {
-        console.warn("API Health error code 1: " + error)
+        console.log("API Health error code 1: " + error)
         return false;
     }
     
@@ -82,7 +81,15 @@ module.exports._test = async () => {
 module.exports.checkAccessCode = async(codeAttempt) => {
 
     // TODO: expose schema to check access code with server.
-    await module.exports.sleep(2000); // wait 2 sec to simulate
+    await module.exports.sleep(1000); // wait 2 sec to simulate
+
+    if (codeAttempt !== "0786"){
+        return {
+            proceed: false,
+            id: 'You passed in ' + codeAttempt,
+            message: "Incorrect gate code."
+        }
+    }
 
     let dummyResponse = {
         proceed: true,

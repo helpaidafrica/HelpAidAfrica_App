@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Text, View, Platform, Dimensions } from 'react-native';
 import * as Device from 'expo-device';
 import { createStackNavigator, CardStyleInterpolators, TransitionPresets } from '@react-navigation/stack';
@@ -33,6 +33,7 @@ const RootStackScreen = () =>{
             	component={AddTracking}
             	options={{
             		animationEnabled: true, 
+                    gestureEnabled: false,
             		headerShown: false, // this worked
             	}}
             />
@@ -41,5 +42,13 @@ const RootStackScreen = () =>{
         </RootStack.Navigator>
     )
 }
+
+export const navigationRef = React.createRef();
+
+export function navigate(name, params) {
+  navigationRef.current?.navigate(name, params);
+  navigationRef.current?.goBack();
+}
+
 
 export default RootStackScreen;

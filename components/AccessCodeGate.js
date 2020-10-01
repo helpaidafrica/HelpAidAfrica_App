@@ -76,6 +76,8 @@ class AccessCodeGate extends React.Component {
             <TouchableOpacity onPress={()=> this._handleJoinTeam()}>
                 <Text style={styles.joinText}>Want to join the team?.</Text>
             </TouchableOpacity>
+
+            <View style={{marginTop: "25%"}}/>
             <ButtonCustom buttonText="Learn more about our mission" color={Global.Styles.primaryGreen} onPress={()=>this._handleLearnMoreClicked()}/>
 
 
@@ -135,7 +137,7 @@ const styles = StyleSheet.create({
         fontStyle: "normal",
         fontWeight: "normal",
         alignSelf: 'center',
-        marginTop: "20%"
+        marginTop: "10%"
     },
 
     joinText:{
@@ -145,10 +147,8 @@ const styles = StyleSheet.create({
         fontStyle: "normal",
         fontWeight: "normal",
         alignSelf: 'center',
-        marginBottom: "25%",
         marginTop: 15,
         textDecorationLine: 'underline',
-
     },
 
     button:{
@@ -171,8 +171,7 @@ const styles = StyleSheet.create({
     },
 
      logo:{
-        marginTop: "25%",
-        marginBottom: 50,
+        marginTop: "15%",
         alignSelf: 'center'
     },
 

@@ -30,7 +30,7 @@ class TemplateComponent extends React.Component {
 
 function mapStateToProps(state){
     return {
-        fullname: state.appStateReducer.fullname,
+        fullname: "friend"//state.appStateReducer.fullname,
     }
 }
 
