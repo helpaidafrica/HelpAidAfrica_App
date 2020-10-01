@@ -24,7 +24,6 @@ class QRCodeInput extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            scanned: true
         };
 
         this._handleBarCodeScanned = this._handleBarCodeScanned.bind(this)
@@ -64,7 +63,7 @@ class QRCodeInput extends React.Component {
         const { status } = await BarCodeScanner.requestPermissionsAsync();
         if (status !== 'granted'){
             Alert.alert("Please allow access to camera. ")
-            return;s
+            return;
         }
 
         LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
@@ -72,6 +71,11 @@ class QRCodeInput extends React.Component {
         this.props.updateBoxID_Number("")
         this.props.updateBoxSearchState(null);
         this.props.updateBoxData(null);
+    }
+
+    _handleCancelScan(){
+        LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
+        this.props.updateBoxScanned(true); 
     }
 
   render() {
@@ -86,7 +90,13 @@ class QRCodeInput extends React.Component {
                 }
 
                 {   !this.props.boxScanned && 
-                    <Ionicons name="ios-qr-scanner" size={150} color={"rgba(242,242,242,.5)"} style={styles.bracket}/>        
+                        <Ionicons name="ios-qr-scanner" size={150} color={"rgba(242,242,242,.5)"} style={styles.bracket}/> 
+                }
+
+                {   !this.props.boxScanned && 
+                        <TouchableOpacity onPress={()=> this._handleCancelScan()} style={styles.cancel}>       
+                            <Ionicons name="ios-close-circle" size={35} color={"rgba(242,242,242,.5)"} />
+                        </TouchableOpacity>
                 }
 
                 {this.props.boxScanned && <TouchableOpacity onPress={() => this._handleQRIconClicked() }><MaterialCommunityIcons name="qrcode-scan" size={124} color="black"/></TouchableOpacity>}
@@ -128,6 +138,15 @@ const styles = StyleSheet.create({
         position: 'absolute',
         justifyContent: 'center',
         alignSelf: 'center',
+    },
+
+    cancel:{
+        position: 'absolute',
+        justifyContent: 'flex-end',
+        right: 0,
+        marginTop: 10,
+        marginRight: 10,
+        alignSelf: 'flex-start'
     }
 });
 

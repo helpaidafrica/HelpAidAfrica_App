@@ -14,13 +14,22 @@ import {
 import SafeAreaView from 'react-native-safe-area-view';
 
 var Global = require('../assets/styles/global');
-
+import {connect} from 'react-redux'
 import { MonoText } from '../components/StyledText';
 
 
-export default function SettingsScreen(props) {
+class TemplateScreen extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
 
-  return (
+    }
+
+  }
+
+  render(){
+
+    return (
         <View style={{height: '100%'}}>
             {Platform.OS === 'ios' && <StatusBar barStyle="light-content" />}
             <SafeAreaView style={styles.container}>
@@ -29,6 +38,10 @@ export default function SettingsScreen(props) {
         </View>
 
   );
+
+  }
+
+  
 }
 
 const styles = StyleSheet.create({
@@ -42,3 +55,19 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
 });
+
+function mapStateToProps(state){
+    return {
+        counter: state.testReducer.counter,
+        counterMultiplied: state.testReducer.counterMultiplied
+    }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) =>{
+    return {
+        increaseCounter: (cons) => dispatch({ type: 'INCREASE_COUNTER' , constant: cons}),
+        decreaseCounter: () => dispatch({ type: 'DECREASE_COUNTER' }),
+    }
+}
+
+export default connect(mapStateToProps, null)(connect(mapStateToProps, mapDispatchToProps)(TemplateScreen))

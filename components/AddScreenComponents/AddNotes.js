@@ -32,7 +32,7 @@ class BoxesAddedList extends React.Component {
         <View style={styles.container}>
             <TextInput
                 multiline={true}
-                onChangeText={text=>this.props.updateNotes({notes:text})}
+                onChangeText={text=>this.props.updateNotes(text)}
                 value={this.props.notes}
                 placeholder={"Anything important/interesting to bring up?"}
                 autoFocus={true}

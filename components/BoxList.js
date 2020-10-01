@@ -9,6 +9,7 @@ import {
 import layout from '../constants/Layout.js';
 var Global = require('../assets/styles/global');
 import {connect} from 'react-redux'
+import * as Linking from 'expo-linking';
   
 
 class TemplateComponent extends React.Component {
@@ -16,6 +17,10 @@ class TemplateComponent extends React.Component {
         super(props);
         this.state = {
         };
+    }
+
+    submitFeedback(){
+      Linking.openURL("mailto:info@helpaidafrica.org?subject=I have some feedback!");        
     }
 
 
@@ -46,8 +51,7 @@ class TemplateComponent extends React.Component {
     
     return(
         <View style={styles.container}>
-            <Button title="Decrease Counter" onPress= {()=> this.getBoxList()}/>
-            <Button title="Increase Counter by 5" onPress= {()=> this.props.increaseCounter(10)}/>
+            <Button title="Have any feedback for the team?" onPress= {()=> this.submitFeedback()}/>
 
         </View>
     );
@@ -70,7 +74,6 @@ const mapDispatchToProps = (dispatch, ownProps) =>{
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'white',
         flex: 1,
         marginTop: 50
     },

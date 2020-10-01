@@ -33,6 +33,7 @@ const RootStackScreen = () =>{
             	component={AddTracking}
             	options={{
             		animationEnabled: true, 
+                    gestureEnabled: false,
             		headerShown: false, // this worked
             	}}
             />

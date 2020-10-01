@@ -31,7 +31,8 @@
     "description": "",
     "backgroundColor": "#DADADA",
     "android": {
-      "package": "com.helpaidafrica.boxtrackingapp"
+      "package": "com.helpaidafrica.boxtrackingapp",
+      "versionCode": 2
     }
   }
 }

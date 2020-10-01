@@ -2,5 +2,6 @@ module.exports = {
 	...require('./local'),
 	...require('./users'),
 	...require('./box'),
-	...require('./locations')
+	...require('./locations'),
+	...require('./trackingevent')
 }

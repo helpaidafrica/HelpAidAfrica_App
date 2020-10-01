@@ -76,8 +76,8 @@ class BoxesAddedList extends React.Component {
                 <Text style={styles.addressLabelText}>{destination.item.locationLabel}</Text>
                 <Text style={styles.addressText}>{destination.item.address.addressLine1}</Text>
                 <Text style={styles.addressText}>{destination.item.address.addressLine2}</Text>
-                <Text style={styles.addressText}>{city}, {state} {zipCode}</Text>
-                <Text style={styles.addressText}>{province} {country}</Text>
+                <Text style={styles.addressText}>{city} {state} {zipCode}</Text>
+                <Text style={styles.addressText}>{province.length > 1 ? (province + ", ") : ""}{country}</Text>
             </TouchableOpacity>
         )
     }
@@ -125,7 +125,9 @@ const styles = StyleSheet.create({
     },
 
     boxContainer:{
-        marginVertical: 10
+        paddingVertical: 10,
+        borderBottomWidth: .5,
+        borderBottomColor: '#DADADA',
     },
 
     addressLabelText:{
