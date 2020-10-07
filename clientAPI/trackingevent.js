@@ -33,8 +33,7 @@ const updateBoxLocations = async () => {
 
   let trackingEventReducerData = store.getState().trackingEventReducer;
 
-  const {trackingInfoID, userLocationID, boxes, destinationOrg, notes } = trackingEventReducerData;
-  let userID = "0"; // TODO: implement users. 
+  const {trackingInfoID, userLocationID, boxes, destinationOrg, notes, userID} = trackingEventReducerData;
   // let trackingInfoID = '1';
   // let locationInfoID = '2';
   let destinationLocationInfoID = destinationOrg.id;
@@ -55,6 +54,7 @@ const updateBoxLocations = async () => {
         imageID: "0",       
         boxID: "${box.boxID}", 
         boxStatus: ${box.nextBoxState},
+        scannedbyUserID: ${userID},
         scanDateTime: $scanDateTime,
         scannedByUserID: $userID,
         notes: $notes

@@ -7,6 +7,7 @@ import BoxesAddedSummaryScreen from "../../screens/subscreens/BoxesAddedSummaryS
 import DestinationSelectScreen from "../../screens/subscreens/DestinationSelectScreen";
 import AddNotesScreen from "../../screens/subscreens/AddNotesScreen";
 import AddScreenHeader from "../../components/AddScreenComponents/AddScreenHeader";
+import SubmittedByScreen from "../../screens/subscreens/SubmittedByScreen";
 
 import { Feather } from '@expo/vector-icons'; 
 
@@ -62,6 +63,17 @@ function AddTracking() {
       <AddTrackingStack.Screen 
         name="Notes" 
         component={AddNotesScreen} 
+        options={{
+              headerBackTitleVisible: false,
+              gestureDirection: 'horizontal',
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
+      
+      />
+
+      <AddTrackingStack.Screen 
+        name="Submitted By" 
+        component={SubmittedByScreen} 
         options={{
               headerBackTitleVisible: false,
               gestureDirection: 'horizontal',

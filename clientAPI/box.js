@@ -92,6 +92,26 @@ module.exports.searchForBox = async (boxID) => {
 }
 
 
+module.exports.removeBoxFromEvent = async (boxID) => {
+  // get current boxes in event
+  let boxes = store.getState().trackingEventReducer.boxes
+
+  console.log("Boxes before: ")
+  console.log(boxes)
+
+  console.log("removing id: " + boxID)
+
+  // remove the boxID
+  boxes = boxes.filter(function(el) { return el.boxID != boxID; }); 
+  console.log("Boxes after: ")
+  console.log(boxes)
+
+  // dispatch to update array
+  store.dispatch({type: 'UPDATE_BOXES', boxes: boxes})
+
+  return {success: true, data: "Success."}
+}
+
 module.exports.addBoxToEvent = async (payload, navigation) => {
 
     // let user know progress is happening
@@ -99,14 +119,14 @@ module.exports.addBoxToEvent = async (payload, navigation) => {
 
     
     // debug
-    await module.exports.sleep(2000)
+    // await module.exports.sleep(2000)
     console.log("box add to event TODO: " + JSON.stringify(payload))    
 
     // get current boxes in event
     let boxes = store.getState().trackingEventReducer.boxes
 
     // append to boxes array
-    boxes = boxes.concat({boxID: payload.boxID, nextBoxState: payload.nextBoxState})
+    boxes = boxes.concat({boxID: payload.boxID, nextBoxState: payload.nextBoxState, previousBoxState: payload.previousBoxState})
 
     // dispatch to update array
     store.dispatch({type: 'UPDATE_BOXES', boxes: boxes})

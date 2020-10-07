@@ -24,6 +24,7 @@ import Destination from '../components/AddScreenComponents/Destination';
 import Boxes from '../components/AddScreenComponents/Boxes';
 import Photos from '../components/AddScreenComponents/Photos';
 import Notes from '../components/AddScreenComponents/Notes';
+import SubmittedBy from '../components/AddScreenComponents/SubmittedBy';
 
 import ClientAPI from '../clientAPI'
 
@@ -51,7 +52,7 @@ async _handleSubmitAddTrackingEvent(){
     let color; 
     let text;
     let disabled;
-    let disabled_notEnoughInfo = (this.props.boxes.length == 0) || (this.props.destinationOrg.locationLabel == "Destination Location")
+    let disabled_notEnoughInfo = (this.props.userID.length == 0) || (this.props.boxes.length == 0) || (this.props.destinationOrg.locationLabel == "Destination Location")
 
     switch (this.props.trackingEventState){
       case null:
@@ -83,6 +84,7 @@ async _handleSubmitAddTrackingEvent(){
     return (
       <View style={styles.container}>
           <Time {...this.props}/>
+          <SubmittedBy {...this.props}/>
           <Destination {...this.props}/>
           <Boxes {...this.props}/>
           <Notes {...this.props}/>
@@ -101,6 +103,7 @@ function mapStateToProps(state){
         counter: state.testReducer.counter,
         trackingEventState: state.trackingEventReducer.trackingEventState,
         boxes: state.trackingEventReducer.boxes,
+        userID: state.trackingEventReducer.userID,
         destinationOrg: state.trackingEventReducer.destinationOrg,
     }
 }

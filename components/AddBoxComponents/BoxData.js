@@ -14,11 +14,6 @@ import ClientAPI from '../../clientAPI'
 import * as Device from 'expo-device'
 
 import ModalSelector from 'react-native-modal-selector'    
-import RNPickerSelect from 'react-native-picker-select';
-// import {Picker} from '@react-native-community/picker';
-
-
-
 import ButtonCustom from '../ButtonCustom'
 
 

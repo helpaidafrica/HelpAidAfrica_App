@@ -5,8 +5,11 @@ import {
     View,
     Button,
     FlatList,
-    Alert
+    Alert,
+    TouchableOpacity
 } from 'react-native';
+
+import { Feather, AntDesign } from '@expo/vector-icons'; 
 
 var Global = require('../../assets/styles/global');
 import {connect} from 'react-redux'
@@ -20,12 +23,43 @@ class BoxesAddedList extends React.Component {
         };
     }
 
+    async _handleDeleteBox(boxID){
+        let r  = await ClientAPI.removeBoxFromEvent(boxID)
+        if (!r.success){
+            Alert.alert("Couldn't remove box: " + r.data)
+        }
+    }
+
+    _handleDeleteButtonPressed(boxID){
+        Alert.alert(
+          boxID,
+          "Are you sure you want to remove this box from tracking event?",
+          [
+            {
+              text: "Cancel",
+              onPress: () => console.log("Cancel Pressed"),
+              style: "cancel"
+            },
+            { text: "OK", onPress: () => this._handleDeleteBox(boxID) }
+          ],
+          { cancelable: false }
+        );
+
+    }
+
   render() {
     const Box = (box)=>{
         return(
             <View style={styles.boxContainer}>
-                <Text style={styles.boxName}>{box.item.boxID}</Text>
-                <View style={styles.boxStateContainer}>
+                <View style={styles.row1}>
+                    <Text style={styles.boxName}>{box.item.boxID}</Text>
+                    <TouchableOpacity onPress= {()=> this._handleDeleteButtonPressed(box.item.boxID)}>
+                        <Feather name="x-circle" size={24} color="red" />
+                    </TouchableOpacity>
+                </View>
+                <View style={[styles.row1, styles.boxStateContainer]}>
+                    <Text style={styles.boxState}>{box.item.previousBoxState}</Text>
+                    <AntDesign name="arrowright" size={24} color="white" />
                     <Text style={styles.boxState}>{box.item.nextBoxState}</Text>
                 </View>
             </View>
@@ -64,8 +98,17 @@ const styles = StyleSheet.create({
         flex: 1,
     },
 
+    row1:{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginRight: 10,
+        alignItems: 'center',
+        marginBottom: 5
+    },
+
     boxContainer:{
-        margin: 15
+        margin: 15,
+        flexDirection: 'column'
     },
 
     boxName:{
@@ -74,7 +117,6 @@ const styles = StyleSheet.create({
     },
 
     boxState:{
-        flex: 1,
         fontSize: 15,
         fontWeight: '400',
         color: 'white',
@@ -84,6 +126,8 @@ const styles = StyleSheet.create({
         backgroundColor: Global.Styles.primaryGreen,
         padding: 10,
         borderRadius: 5, 
+        width: '100%',
+        justifyContent: 'space-around'
     }
 
 });

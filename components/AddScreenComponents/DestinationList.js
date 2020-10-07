@@ -31,7 +31,11 @@ class BoxesAddedList extends React.Component {
             Alert.alert("Error getting destinations: " + destinations.data)
         }
 
-        this.setState({destinations: destinations.data})
+        let  d = destinations.data;
+        d = d.filter(function(el) { return el.id != "0"; }); 
+
+
+        this.setState({destinations: d})
         
         console.log(this.state.destinations)
 

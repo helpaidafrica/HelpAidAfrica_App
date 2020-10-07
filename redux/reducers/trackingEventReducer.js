@@ -1,7 +1,8 @@
 const initialState = {
     userLocationID: null, // ID of the location of user
     trackingInfoID: null, // ID of the tracking event
-    boxes: [], // [{boxID: "", nextBoxState: ""}]
+    userID: "", // ID of the user. Manual input for now
+    boxes: [], // [{boxID: "", nextBoxState: "", previousBoxState: ""}]
     destinationOrg: {id: 0, locationLabel: "Destination Location"},  // {id: #, locationLabel: "Human Readable Label"}
     notes: null,
     trackingEventState: null // null, adding, addSuccess, addFailure
@@ -17,6 +18,7 @@ const trackingEventReducer = (state = initialState, action) => {
                 destinationOrg: state.destinationOrg,
                 notes: state.notes,
                 trackingEventState: state.trackingEventState,
+                userID: state.userID
             }
 
         case 'UPDATE_TRACKINGINFOID':
@@ -27,6 +29,7 @@ const trackingEventReducer = (state = initialState, action) => {
                 destinationOrg: state.destinationOrg,
                 notes: state.notes,
                 trackingEventState: state.trackingEventState,
+                userID: state.userID
             }
 
         case 'UPDATE_BOXES':
@@ -37,6 +40,7 @@ const trackingEventReducer = (state = initialState, action) => {
                 destinationOrg: state.destinationOrg,
                 notes: state.notes,
                 trackingEventState: state.trackingEventState,
+                userID: state.userID
             }
 
         case 'UPDATE_DESTINATION':
@@ -47,6 +51,7 @@ const trackingEventReducer = (state = initialState, action) => {
                 destinationOrg: action.destinationOrg,
                 notes: state.notes,
                 trackingEventState: state.trackingEventState,
+                userID: state.userID
             }
 
         case 'UPDATE_NOTES':
@@ -57,6 +62,7 @@ const trackingEventReducer = (state = initialState, action) => {
                 destinationOrg: state.destinationOrg,
                 notes: action.notes,
                 trackingEventState: state.trackingEventState,
+                userID: state.userID
             }
 
         case 'RESET_TRACKINGEVENT':
@@ -67,6 +73,7 @@ const trackingEventReducer = (state = initialState, action) => {
                 destinationOrg: initialState.destinationOrg,
                 notes: initialState.notes,
                 trackingEventState: initialState.trackingEventState,
+                userID: state.userID
             }
 
         case 'UPDATE_TRACKINGEVENTSTATE':
@@ -77,6 +84,18 @@ const trackingEventReducer = (state = initialState, action) => {
                 destinationOrg: state.destinationOrg,
                 notes: state.notes,
                 trackingEventState: action.trackingEventState,
+                userID: state.userID
+            }
+
+        case 'UPDATE_USERID':
+            return {
+                userLocationID: state.userLocationID,
+                trackingInfoID: state.trackingInfoID,
+                boxes: state.boxes,
+                destinationOrg: state.destinationOrg,
+                notes: state.notes,
+                trackingEventState: state.trackingEventState,
+                userID: action.userID
             }
         
     }
