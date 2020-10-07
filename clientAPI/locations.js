@@ -11,7 +11,7 @@ module.exports.fetchDestinations = async() => {
 
     // graphql query
     let query = `{
-  listLocationInfos (filter: {locationLabel: {notContains: "user current location"}}){
+  listLocationInfos (filter: {locationLabel: {notContains: "user current location"}, isActive: {eq: true}}){
     items {
       locationLabel
       id

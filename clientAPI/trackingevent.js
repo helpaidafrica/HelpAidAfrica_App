@@ -54,9 +54,8 @@ const updateBoxLocations = async () => {
         imageID: "0",       
         boxID: "${box.boxID}", 
         boxStatus: ${box.nextBoxState},
-        scannedbyUserID: ${userID},
-        scanDateTime: $scanDateTime,
         scannedByUserID: $userID,
+        scanDateTime: $scanDateTime,
         notes: $notes
       }
       )
@@ -76,6 +75,8 @@ const updateBoxLocations = async () => {
     $scanDateTime: AWSDateTime = "${new Date().toISOString()}",
     $notes: String="${notes}"
     ) { ${boxesMutation}}`
+
+    console.log(mutation)
 
   // setup request
   let props = {
@@ -114,16 +115,18 @@ const updateBoxLocations = async () => {
 }
 
 const createTrackingEventID = async () => {
-  let userID = 0; // TODO: implement users. 
+  let trackingEventReducerData = store.getState().trackingEventReducer;
+
+  const {userID} = trackingEventReducerData;
+  console.log("SUer id is"  + userID)
 
   // graphql mutation
   let mutation = 
   `mutation createTrackInfo {
-  createTrackingInfo(input: {userID: ${userID}, isActive: true, imageID: "0", 
+  createTrackingInfo(input: {userID: "${userID}", isActive: true, imageID: "0", 
   timeOfDelivery: "${new Date().toISOString()}"}) {
     id
     userID
-    internalNotes
   }
 }`
 
@@ -138,6 +141,8 @@ const createTrackingEventID = async () => {
   try {
       let response = await fetch(API_ENDPOINT, props);
       r = await response.json();
+
+      console.log("Response: " + JSON.stringify(r))
 
       // check if error
       if (r.hasOwnProperty("error")){
