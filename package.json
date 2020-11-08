@@ -41,6 +41,7 @@
     "expo-device": "~2.3.0",
     "expo-font": "~8.3.0",
     "expo-haptics": "~8.3.0",
+    "expo-image-picker": "~9.1.0",
     "expo-linear-gradient": "~8.3.0",
     "expo-notifications": "~0.7.2",
     "expo-sms": "~8.3.1",

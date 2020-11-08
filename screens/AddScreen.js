@@ -88,6 +88,7 @@ async _handleSubmitAddTrackingEvent(){
           <Destination {...this.props}/>
           <Boxes {...this.props}/>
           <Notes {...this.props}/>
+          <Photos {...this.props}/>
 
           
           <AddButton/>

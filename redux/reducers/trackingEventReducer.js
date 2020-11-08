@@ -5,7 +5,8 @@ const initialState = {
     boxes: [], // [{boxID: "", nextBoxState: "", previousBoxState: ""}]
     destinationOrg: {id: 0, locationLabel: "Destination Location"},  // {id: #, locationLabel: "Human Readable Label"}
     notes: null,
-    trackingEventState: null // null, adding, addSuccess, addFailure
+    trackingEventState: null, // null, adding, addSuccess, addFailure
+    images: [] // array of uris
 }
 
 const trackingEventReducer = (state = initialState, action) => {
@@ -18,7 +19,8 @@ const trackingEventReducer = (state = initialState, action) => {
                 destinationOrg: state.destinationOrg,
                 notes: state.notes,
                 trackingEventState: state.trackingEventState,
-                userID: state.userID
+                userID: state.userID,
+                images: state.images,
             }
 
         case 'UPDATE_TRACKINGINFOID':
@@ -29,7 +31,8 @@ const trackingEventReducer = (state = initialState, action) => {
                 destinationOrg: state.destinationOrg,
                 notes: state.notes,
                 trackingEventState: state.trackingEventState,
-                userID: state.userID
+                userID: state.userID,
+                images: state.images,
             }
 
         case 'UPDATE_BOXES':
@@ -40,7 +43,8 @@ const trackingEventReducer = (state = initialState, action) => {
                 destinationOrg: state.destinationOrg,
                 notes: state.notes,
                 trackingEventState: state.trackingEventState,
-                userID: state.userID
+                userID: state.userID,
+                images: state.images,
             }
 
         case 'UPDATE_DESTINATION':
@@ -51,7 +55,8 @@ const trackingEventReducer = (state = initialState, action) => {
                 destinationOrg: action.destinationOrg,
                 notes: state.notes,
                 trackingEventState: state.trackingEventState,
-                userID: state.userID
+                userID: state.userID,
+                images: state.images,
             }
 
         case 'UPDATE_NOTES':
@@ -62,7 +67,8 @@ const trackingEventReducer = (state = initialState, action) => {
                 destinationOrg: state.destinationOrg,
                 notes: action.notes,
                 trackingEventState: state.trackingEventState,
-                userID: state.userID
+                userID: state.userID,
+                images: state.images,
             }
 
         case 'RESET_TRACKINGEVENT':
@@ -73,7 +79,8 @@ const trackingEventReducer = (state = initialState, action) => {
                 destinationOrg: initialState.destinationOrg,
                 notes: initialState.notes,
                 trackingEventState: initialState.trackingEventState,
-                userID: state.userID
+                userID: initialState.userID,
+                images: initialState.images,
             }
 
         case 'UPDATE_TRACKINGEVENTSTATE':
@@ -84,7 +91,8 @@ const trackingEventReducer = (state = initialState, action) => {
                 destinationOrg: state.destinationOrg,
                 notes: state.notes,
                 trackingEventState: action.trackingEventState,
-                userID: state.userID
+                userID: state.userID,
+                images: state.images,
             }
 
         case 'UPDATE_USERID':
@@ -95,7 +103,20 @@ const trackingEventReducer = (state = initialState, action) => {
                 destinationOrg: state.destinationOrg,
                 notes: state.notes,
                 trackingEventState: state.trackingEventState,
-                userID: action.userID
+                userID: action.userID,
+                images: state.images,
+            }
+
+        case 'UPDATE_IMAGES':
+            return {
+                userLocationID: state.userLocationID,
+                trackingInfoID: state.trackingInfoID,
+                boxes: state.boxes,
+                destinationOrg: state.destinationOrg,
+                notes: state.notes,
+                trackingEventState: state.trackingEventState,
+                userID: state.userID,
+                images: action.images,
             }
         
     }
