@@ -1,19 +1,19 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
-  Image,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  StatusBar,
-  View,
-  Button,
-  Alert
+    Image,
+    Platform,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    StatusBar,
+    View,
+    Button,
+    Alert
 } from 'react-native';
 
-import { AntDesign, MaterialIcons } from '@expo/vector-icons'; 
-import {connect} from 'react-redux'
+import { AntDesign, MaterialIcons } from '@expo/vector-icons';
+import { connect } from 'react-redux'
 
 var Global = require('../assets/styles/global');
 
@@ -30,76 +30,75 @@ import ClientAPI from '../clientAPI'
 
 
 class AddScreen extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
+    constructor(props) {
+        super(props);
+        this.state = {
 
-    }
-  }
-
-async _handleSubmitAddTrackingEvent(){
-  ClientAPI.addTrackingEvent(this.props.navigation);
-}
-
-  _handleResetAndGoHome(){
-    this.props.navigation.navigate("Main")
-    this.props.resetAddTrackingInfo();
-  }
-
-  render(){
-
-  const AddButton = ()=>{
-    let color; 
-    let text;
-    let disabled;
-    let disabled_notEnoughInfo = (this.props.userID.length == 0) || (this.props.boxes.length == 0) || (this.props.destinationOrg.locationLabel == "Destination Location")
-
-    switch (this.props.trackingEventState){
-      case null:
-      case "addFailure":
-        color = Global.Styles.primaryGreen
-        text = "Complete Tracking Event"
-        disabled = disabled_notEnoughInfo//false
-        break;
-
-      case "adding":
-        color = Global.Styles.primaryGreen
-        text = "..."
-        disabled = true
-        break;
-
-      case "addSuccess":
-        color = Global.Styles.primaryGreen
-        text = "Success!"
-        disabled = true
-        break;
+        }
     }
 
-    
-    
-    return(
-      <ButtonCustom buttonText={text} color={color} disabled={disabled || disabled_notEnoughInfo} onPress={()=>this._handleSubmitAddTrackingEvent()}/>
-    )
-  }
-    return (
-      <View style={styles.container}>
+    async _handleSubmitAddTrackingEvent() {
+        ClientAPI.addTrackingEvent(this.props.navigation);
+    }
+
+    _handleResetAndGoHome() {
+        this.props.navigation.navigate("Main")
+        this.props.resetAddTrackingInfo();
+    }
+
+    render() {
+
+        const AddButton = () => {
+            let color;
+            let text;
+            let disabled;
+            let disabled_notEnoughInfo = (this.props.userID.length == 0) || (this.props.boxes.length == 0) || (this.props.destinationOrg.locationLabel == "Destination Location")
+
+            switch (this.props.trackingEventState) {
+                case null:
+                case "addFailure":
+                    color = Global.Styles.primaryGreen
+                    text = "Complete Tracking Event"
+                    disabled = disabled_notEnoughInfo //false
+                    break;
+
+                case "adding":
+                    color = Global.Styles.primaryGreen
+                    text = "..."
+                    disabled = true
+                    break;
+
+                case "addSuccess":
+                    color = Global.Styles.primaryGreen
+                    text = "Success!"
+                    disabled = true
+                    break;
+            }
+
+
+
+            return (
+                <ButtonCustom buttonText={text} color={color} disabled={disabled || disabled_notEnoughInfo} onPress={()=>this._handleSubmitAddTrackingEvent()}/>
+            )
+        }
+        return (
+            <View style={styles.container}>
           <Time {...this.props}/>
           <SubmittedBy {...this.props}/>
           <Destination {...this.props}/>
           <Boxes {...this.props}/>
           <Notes {...this.props}/>
-          <Photos {...this.props}/>
 
           
           <AddButton/>
           <ButtonCustom buttonText="Discard" color={Global.Styles.cancelRed} onPress={()=>this._handleResetAndGoHome()}/>
       </View>
 
-      );
-  }
+        );
+    }
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
     return {
         counter: state.testReducer.counter,
         trackingEventState: state.trackingEventReducer.trackingEventState,
@@ -109,22 +108,21 @@ function mapStateToProps(state){
     }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) =>{
+const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        resetAddTrackingInfo: () => dispatch({ type: 'RESET_TRACKINGEVENT'}),
+        resetAddTrackingInfo: () => dispatch({ type: 'RESET_TRACKINGEVENT' }),
     }
 }
 
 const styles = StyleSheet.create({
 
-  container: {
-    flex: 1,
-    backgroundColor: Global.Styles.appBackgroundColor,
-    flexDirection: 'column',
-    paddingTop: 25
-  },
+    container: {
+        flex: 1,
+        backgroundColor: Global.Styles.appBackgroundColor,
+        flexDirection: 'column',
+        paddingTop: 25
+    },
 });
 
 // export default AddScreen;
 export default connect(mapStateToProps, null)(connect(mapStateToProps, mapDispatchToProps)(AddScreen))
-
