@@ -54,9 +54,9 @@ class PhotosAddedList extends React.Component {
 
     async _testSubmitPhotos() {
         let text = `Hello! ${this.props.fullName} from HelpAidAfrica here. I'm attaching some photos from this tracking event. `
-Linking.openURL(
-    'http://api.whatsapp.com/send?phone=+1(510)520-2101&text=Please send all photos here:!'
-);
+        Linking.openURL(
+            'http://api.whatsapp.com/send?phone=+1(510)520-2101&text=Please send all photos here! \r\n Name: \r'
+        );
 
         return
 
@@ -105,8 +105,8 @@ Linking.openURL(
 
         return (
             <View style={styles.container}>
-            <Button title="Add Photo" onPress={()=> this._pickImage()}/>
-            <Button title="Upload Photo" onPress={()=> this._testSubmitPhotos()}/>
+            {/*<Button title="Add Photo" onPress={()=> this._pickImage()}/>*/}
+            <Button title="Send Photos (Beta)" onPress={()=> this._testSubmitPhotos()}/>
             <FlatList
                 data={this.props.images}
                 renderItem={ImageToShow}
