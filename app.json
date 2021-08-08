@@ -8,7 +8,7 @@
       "android",
       "web"
     ],
-    "version": "2.0.0",
+    "version": "2.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "splash": {
@@ -25,14 +25,14 @@
     "ios": {
       "supportsTablet": false,
       "backgroundColor": "#F8F8F8",
-      "buildNumber": "2.0.0",
+      "buildNumber": "2.0.1",
       "bundleIdentifier": "com.helpaidafrica.boxtrackingapp"
     },
     "description": "",
     "backgroundColor": "#DADADA",
     "android": {
       "package": "com.helpaidafrica.boxtrackingapp",
-      "versionCode": 2
+      "versionCode": 3
     }
   }
 }

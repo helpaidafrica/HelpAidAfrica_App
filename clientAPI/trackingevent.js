@@ -183,10 +183,27 @@ const createTrackingEventID = async () => {
     }
 }
 
+const AsyncPermissionsAlert = () => {
+    return new Promise((resolve, reject) => {
+        Alert.alert(
+            'Help Aid Africa',
+            '"Help Aid Africa uses your location once per tracking event to know where you are with the boxes."',
+            [
+                {text: 'OK', onPress: () => resolve('OK') },
+            ],
+            { cancelable: true }
+        )
+    })
+} 
+
 const getLatLong = async () => {
-    let { status } = await Location.requestPermissionsAsync();
-    if (status !== 'granted') {
-        return { success: false, data: "Permission to access location was denied" }
+    let { status1 } = await Location.getPermissionsAsync();
+    if (status1 !== 'granted'){
+        await AsyncPermissionsAlert()
+        let { status } = await Location.requestPermissionsAsync();
+        if (status !== 'granted') {
+            return { success: false, data: "Permission to access location was denied" }
+        }
     }
 
     try {
