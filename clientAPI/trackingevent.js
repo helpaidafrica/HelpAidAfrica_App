@@ -187,7 +187,7 @@ const AsyncPermissionsAlert = () => {
     return new Promise((resolve, reject) => {
         Alert.alert(
             'Help Aid Africa',
-            '"Help Aid Africa uses your location once per tracking event to know where you are with the boxes."',
+            '"Help Aid Africa uses your location in the background for one feature: once per tracking event to know where you are with the boxes."',
             [
                 {text: 'OK', onPress: () => resolve('OK') },
             ],
